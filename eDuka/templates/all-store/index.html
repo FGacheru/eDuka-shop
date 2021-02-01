@@ -1,0 +1,46 @@
+{% extends 'all-store/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-4">
+        <img class="thumbnail" style="width: 350px;height: 200px; box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);" src="{% static 'Images/2+placeholder.png' %}">
+        <div class="box-element product" style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;background-color: #fff; border-radius: 4px;padding: 10px;">
+            <h6><strong>Product</strong></h6>
+            <hr>
+
+            <button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block;" class="float-right"><strong>$20</strong></h4>
+
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <img class="thumbnail" style="width: 350px;height: 200px; box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);" src="{% static 'Images/2+placeholder.png' %}">
+        <div class="box-element product" style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;background-color: #fff; border-radius: 4px;padding: 10px;">
+            <h6><strong>Product</strong></h6>
+            <hr>
+            
+            <button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block;" class="float-right"><strong>$20</strong></h4>
+            
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <img class="thumbnail" style="width: 350px;height: 200px; box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);" src="{% static 'Images/2+placeholder.png' %}">
+        <div class="box-element product" style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;background-color: #fff; border-radius: 4px;padding: 10px;">
+            
+            <h6><strong>Product</strong></h6>
+            <hr>
+
+            <button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
+            <a class="btn btn-outline-success" href="#">View</a>
+            <h4 style="display: inline-block;" class="float-right"><strong>$20</strong></h4>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
