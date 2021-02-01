@@ -14,9 +14,9 @@
                     </div>
                 </div>
                 
-                <div id="delivery-info">
+                <div id="shipping-info">
                     <hr>
-                    <p>Delivery Information:</p>
+                    <p>Shipping Information:</p>
                     <hr>
                     <div class="form-field">
                         <input class="form-control" type="text" name="address" placeholder="Address..">
@@ -31,7 +31,7 @@
                         <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="county" placeholder="Zip code..">
+                        <input class="form-control" type="text" name="country" placeholder="Zip code..">
                     </div>
                 </div>
 
@@ -39,13 +39,16 @@
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
             </form>
         </div>
+
+        <br>
+        <div class="box-element hidden" id="payment-info">
+            <small>Mpesa Options</small>
+        </div>
         
     </div>
 
     <div class="col-lg-6">
-        <div class="box-element">
-
-        </div>
+        
     </div>
 </div>
 {% endblock content %}
