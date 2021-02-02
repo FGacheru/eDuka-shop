@@ -13,7 +13,15 @@ def index(request):
     return render(request, 'all-store/index.html', context)
 
 def cart(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+
+    else:
+        items = []
+
+    context = {'items':items}
     return render(request, 'all-store/cart.html', context)
 
 def checkout(request):
