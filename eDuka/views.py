@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from .models import *
+from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse
+import json
 
-from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    context = {}
+    products = Product.objects.all()
+    context = {'products':products}
     return render(request, 'all-store/index.html', context)
 
 def cart(request):
