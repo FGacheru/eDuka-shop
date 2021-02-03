@@ -7,7 +7,4 @@ from django.contrib import admin
 admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order)
-admin.site.register(Item)
-admin.site.register(DeliveryAddress)
-admin.site.register(Comment)
-admin.site.register(Post)
+admin.site.register(OrderItem)
