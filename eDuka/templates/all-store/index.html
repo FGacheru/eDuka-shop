@@ -24,12 +24,13 @@
                 <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn"
                     update-cart>Add to Cart</button>
                 <a class="btn btn-outline-success" href="#">View</a>
-                <h4 style="display: inline-block;float:right;"><strong>${{product.price|floatformat:2}}</strong></h4>
+                <h4 style="display: inline-block;float:right;"><strong>Ksh.{{product.price|floatformat:2}}</strong></h4>
                 <p>{% ratings product %}</p>
             </div>
             </div>
       {% endfor %}
     </div>
+    
     {% endblock %}
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>

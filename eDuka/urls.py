@@ -8,7 +8,7 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('checkout/',views.checkout,name ='checkout'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    path('product/(\d+)', views.product, name='product_results'),      
+    path('product/(\d+)', views.product, name='product_results'),   
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

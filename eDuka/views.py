@@ -4,6 +4,7 @@ from .models import *
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 import json
+from django.views.generic import DetailView
 
 
 # Create your views here.
@@ -49,3 +50,5 @@ def checkout(request):
 
     context = {'items':items, 'order':order}
     return render(request, 'all-store/checkout.html', context)
+
+
