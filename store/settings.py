@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eDuka',
-    'bootstrap3'
+    'bootstrap3',
+    'star_ratings'
+
 ]
 
 MIDDLEWARE = [

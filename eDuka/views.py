@@ -12,6 +12,16 @@ def index(request):
     context = {'products':products}
     return render(request, 'all-store/index.html', context)
 
+def product(request, id):
+
+    try:
+        products = Product.objects.get(pk = id)
+        
+    except ObjectDoesNotExist:
+        raise Http404()    
+    
+    return render(request, "all-store/products.html", {"products":products})
+
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer

@@ -2,19 +2,36 @@
 {% load bootstrap3 %}
 {% load static %}
 {% block content %}
-<div class="row">
-    {% for product in products %}
-    <div class="col-lg-4">
-        <img class="thumbnail" style="width: 350px;height: 200px; box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);" src="{{product.imageURL}}">
-        <div class="box-element product" style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;background-color: #fff; border-radius: 4px;padding: 10px;">
-            <h6><strong>{{product.name}}</strong></h6>
-            <hr>
-
-            <button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
-            <a class="btn btn-outline-success" href="#">View</a>
-            <h4 style="display: inline-block;float:right;"><strong>${{product.price|floatformat:2}}</strong></h4>
-        </div>
+{% load ratings %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eDuka</title>
+    
+</head>
+<body>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4">
+            <img class="thumbnail" style="width: 350px;height: 200px; box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);"
+                src="{{product.imageURL}}">
+            <div class="box-element product"
+                style="box-shadow:hsl(0, 0%, 80%) 0 0 16px;background-color: #fff; border-radius: 4px;padding: 10px;">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr>
+                <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn"
+                    update-cart>Add to Cart</button>
+                <a class="btn btn-outline-success" href="#">View</a>
+                <h4 style="display: inline-block;float:right;"><strong>${{product.price|floatformat:2}}</strong></h4>
+                <p>{% ratings product %}</p>
+            </div>
+            </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endblock %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+</body>
+</html>
