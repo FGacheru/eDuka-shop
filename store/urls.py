@@ -21,5 +21,8 @@ from django.contrib.auth import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('eDuka.urls')),
+    url('accounts/', include('django_registration.backends.one_step.urls')),
+    url('accounts/', include('django.contrib.auth.urls')),
+    url("logout", views.logout_then_login, name= "logout")
 ]
 
