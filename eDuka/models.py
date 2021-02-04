@@ -17,6 +17,7 @@ class Product(models.Model):
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
+	posted_date= models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.name
@@ -28,6 +29,15 @@ class Product(models.Model):
 		except:
 			url = ''
 		return url
+
+	@classmethod
+    def get_product(cls,id):
+        try:
+            product = Product.objects.get(pk=id)
+        except ObjectDoesNotExist:
+            raise Http404()
+        return Product
+	
 
 class Order(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
@@ -81,3 +91,28 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+
+class Category(models.Model):
+    category = models.CharField(max_length =30)
+
+    @classmethod
+    def get_all_categories(cls):
+        '''
+        Method to get all categories
+        '''
+        categories = cls.objects.all()
+        return categories
+
+    def save_category(self):
+        '''
+        Method to save category
+        '''
+        self.save()
+
+    @classmethod
+    def delete_category(cls,category):
+        cls.objects.filter(category=category).delete()
+
+    
+    def __str__(self):
+        return self.category
