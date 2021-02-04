@@ -14,8 +14,8 @@
                    <img
                        class="rounded-circle mr-2"
                        style="width: 20px; height: 20px;"
-                       src="{{ post.author.profile.image.url }}">
-                   <a class="mr-2 white-important" href="{% url 'product/id/' product.author %}">
+                       src="{{ product.author.product.image.url }}">
+                   <a class="mr-2 white-important" href="/product/{{post.id}}/' product.author %}">
                        {{ post.author }}
                    </a>
                </div>

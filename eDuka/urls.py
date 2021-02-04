@@ -10,6 +10,7 @@ from django.urls import path, include
 from . import views
 urlpatterns = [
     path('',views.index,name='index'),
+    path('about/',views.about,name='about'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     # path('addcomment/',views.addcomment,name='addcomment'),
     path('cart/', views.cart, name='cart'),

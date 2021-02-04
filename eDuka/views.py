@@ -18,6 +18,10 @@ def index(request):
 	context = {'products':products, 'cartItems':cartItems}
 	return render(request, 'all-store/index.html', context)
 
+def about(request):
+
+	
+	return render(request, 'all-store/about.html')
 
 def cart(request):
 	data = cartData(request)
@@ -97,12 +101,12 @@ def search_results(request):
     '''
     Method to search by location or category
     '''
-    if 'result' in request.GET and request.GET["result"]:
-        search_term = request.GET.get("result")
+    if 'product' in request.GET and request.GET["product"]:
+        search_term = request.GET.get("product")
         searched_products = Product.search_by_category(search_term)
        
         message = f"{search_term}"
-        return render(request, 'all-store/search.html', {"message":message, "images":searched_images})
+        return render(request, 'all-store/search.html', {"message":message, "products":searched_products})
     
     else:
         message = "You haven't searched for any term"

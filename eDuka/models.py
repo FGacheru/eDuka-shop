@@ -23,6 +23,7 @@ class Product(models.Model):
 	image = models.ImageField(null=True, blank=True)
 	posted_date= models.DateTimeField(auto_now_add=True)
 	category = models.ForeignKey('Category', on_delete=models.CASCADE)
+	description = models.TextField(max_length=150)
 
 	def __str__(self):
 		return self.name
@@ -40,8 +41,8 @@ class Product(models.Model):
 		'''
 		Method to filter images by category
 		'''
-		result = cls.objects.filter(category__category__icontains=search_term)
-		return result
+		product = cls.objects.filter(category__category__icontains=search_term)
+		return product
 
 	@classmethod
 	def get_product(cls,id):
@@ -50,7 +51,6 @@ class Product(models.Model):
 		except ObjectDoesNotExist:
 			raise Http404()
 		return Product
-	
 
 class Order(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
