@@ -1,85 +1,51 @@
-my products....
+{% extends 'all-store/base.html' %}
 {% load ratings %}
 {% load bootstrap3%}
 {% load static %}
 {% block content %}
-<div class="container" style="padding-top: 70px;">
-  <div class="row mt-4"></div>
-  <!-- Grid row -->
+<hr class="mt-5">
+<div class="container" style="font-size: 20px;font-family: 'Merienda One', cursive;">
   <div class="row">
-    <div class="col-md-2"></div>
-    <!-- Grid column -->
-    <div class="col-md-8">
-
-      <!-- Card -->
-      <div class="card card-cascade wider reverse">
-
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          {% if product.product_image %}
-          <img class="card-img-top" src="{{product.image.url}}" alt="{{ product.product_name }}"
-            style="max-height: 450px;" height="400" width="700">
-          {% else %}
-          <img class="card-img-top" src="https://source.unsplash.com/1600x900/?fun,vacation"
-            alt="{{ product.product_name }}">
-          {% endif %}
-          <a href="#!">
-            <div class="mask rgba-white-slight">
-              <div class="d-flex justify-content-end">
-                <a href="{{product.url}}" target="_blank" title="Visit site"> <button type="button"
-                    class="btn btn-light px-3"><i class="fas fa-directions" aria-hidden="true"></i></button>
-                </a></div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-
-          <!-- Title -->
-          <!-- <h2 class="font-weight-bold"><a>{{ product.product_title }}</a></h2> -->
-          <!-- Data -->
-          <h4 class="">{{ product.description }}</h4>
-
-          <!-- Social shares -->
-          <div>
-            <a href="{{product.url}}" target="_blank" title="Visit site">
-              <button type="button" class="btn btn-default font-weight-bold px-3">Visit site</button></a>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 dark-text">
-              <img src="{{ product_item.author.image.url }}" alt="" class="rounded-circle img-fluid mr-1" style="width: 40px;">
-              Posted By:{{product_item.author|upper}}<small><div class="col-lg-6 dark-text"> <small> Date Posted: {{product.pub_date|date:"d /m/Y"}} </small> </div>
-            </div>
-          </div>
-          <div class="mt-2 pt-2">
-            <div class="row">
-              <div class="col-md-4">
-                <h4>Design Rating</h4>
-                {% ratings product %}
-              </div>
-              <div class="col-md-4">
-                <h4>Usability Rating</h4>
-                {% ratings product %}
-              </div>
-              <div class="col-md-4">
-                <h4>Content Rating</h4>
-                {% ratings product %}
-              </div>
-            </div>
-          </div>
-          <!-- Card content -->
-        </div>
-
+    <div class="col-md-5">
+      <div class="product-img">
+        <img class="product-image" src="{{ product.imageURL }}" alt="img" height="200px" style="border-radius: 50%;">
       </div>
-      <!-- Grid column -->
-      <div class="col-md-2"></div>
-
     </div>
-    <!-- Grid row -->
+    <div class="col-md-5">
+      <p style="font-size: 60px;"></p>
+      <p class="mt-2">{{product.name}}<p><br>
+          <hr>
+          <!-- <p class="mt-2">Product Overview<p><br> -->
+              <p class="mt-2">{{product.description}}</p>
+              <hr>
+              <p class="mt-2"> PRICE; ksh{{product.price}}</p>
+              <hr>
+              <!-- <p class="mt-2">{% ratings product %}</p> -->
+              <hr>
+    </div>
   </div>
+  <br><br>
+  <h4 class="text-uppercase">Write Your Review</h4>
+  <form class="review-form" action="/product/addcomment/" method="POST">
+    {% csrf_token %}
+<div class="form-group">
+<input name="subject" type="text" class="input" placeholder="Your Subject">
+</div>
+<div class="form-group">
+  <textarea name="comment" class="input" placeholder="Your review"></textarea>
+</div>
+<strong class="text-uppercase">Your Rating:</strong>
+<div class="form-group">
+  {% ratings product %}
+</div>
+{% if user.id is not None %}
+<button class="primary-btn">Submit</button>
+{% else %}
+You must be logged in to post a review
+{% endif %}
+  </form>
+</div>
+{% endblock %}
 
-  {% endblock %}
-
-  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-  <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>

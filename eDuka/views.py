@@ -1,10 +1,11 @@
-
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
 import datetime
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
+from django.views.generic import DetailView
+from .forms import NewCommentForm
 
 def index(request):
 	data = cartData(request)
@@ -91,3 +92,42 @@ def processOrder(request):
 		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
+def search_results(request):
+    '''
+    Method to search by location or category
+    '''
+    if 'result' in request.GET and request.GET["result"]:
+        search_term = request.GET.get("result")
+        searched_products = Product.search_by_category(search_term)
+       
+        message = f"{search_term}"
+        return render(request, 'all-store/search.html', {"message":message, "images":searched_images})
+    
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-store/search.html', {"message":message})
+
+def get_product(request, id):
+    product = Product.objects.get(pk=id)
+    return render(request, 'all-store/products.html', {'product':product})
+
+class PostDetailView(DetailView):
+    model = Product
+    template_name = 'all-store/product_detail.html'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        comments_connected = Comment.objects.filter(post_connected=self.get_object()).order_by('-date_posted')
+        data['comments'] = comments_connected
+        data['form'] = NewCommentForm(instance=self.request.user)
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(content=request.POST.get('content'),
+                              author=self.request.user,
+                              post_connected=self.get_object())
+        new_comment.save()
+
+        return self.get(self, request, *args, **kwargs)

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 # Create your models here.
 
 class Customer(models.Model):
@@ -13,11 +13,16 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
+	STATUS = (
+		('True', 'True'),
+		('False', 'False'),
+	)
 	name = models.CharField(max_length=200)
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
 	posted_date= models.DateTimeField(auto_now_add=True)
+	category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.name
@@ -31,12 +36,20 @@ class Product(models.Model):
 		return url
 
 	@classmethod
-    def get_product(cls,id):
-        try:
-            product = Product.objects.get(pk=id)
-        except ObjectDoesNotExist:
-            raise Http404()
-        return Product
+	def search_by_category(cls, search_term):
+		'''
+		Method to filter images by category
+		'''
+		result = cls.objects.filter(category__category__icontains=search_term)
+		return result
+
+	@classmethod
+	def get_product(cls,id):
+		try:
+			product = Product.objects.get(pk=id)
+		except ObjectDoesNotExist:
+			raise Http404()
+		return Product
 	
 
 class Order(models.Model):
@@ -92,6 +105,31 @@ class ShippingAddress(models.Model):
 	def __str__(self):
 		return self.address
 
+# class Comment(models.Model):
+# 	STATUS = (
+# 		('Now', 'Now'),
+# 		('True', 'True'),
+# 		('False', 'False'),
+# 	)
+# 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+# 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+# 	subject = models.CharField(max_length=50, blank=True)		
+# 	comment = models.CharField(max_length=250, blank=True)
+# 	ip = models.CharField(max_length=20, blank=True)
+# 	status = models.CharField(max_length=10, choices=STATUS, default='Now')
+# 	create_at = models.DateTimeField(auto_now_add=True)
+# 	update_at = models.DateTimeField(auto_now=True)
+
+# 	def __str__(self):
+# 		return self.subject
+
+class Comment(models.Model):
+    content = models.TextField(max_length=150)
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_connected = models.ForeignKey(Product, on_delete=models.CASCADE)
+		
+
 class Category(models.Model):
     category = models.CharField(max_length =30)
 
@@ -116,3 +154,5 @@ class Category(models.Model):
     
     def __str__(self):
         return self.category
+
+

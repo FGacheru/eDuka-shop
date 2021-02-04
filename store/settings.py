@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eDuka',
-    'bootstrap3',
-    'star_ratings'
+    'bootstrap4',
+    'star_ratings',
+    ]
 
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

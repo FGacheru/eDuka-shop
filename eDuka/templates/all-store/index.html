@@ -1,5 +1,5 @@
 {% extends 'all-store/base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load static %}
 {% block content %}
 {% load ratings %}
@@ -23,7 +23,7 @@
                 <hr>
                 <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
 				
-                <a class="btn btn-outline-success" href="#">View</a>
+                <a class="btn btn-outline-success" href="product/{{product.id}}">View</a>
                 <h4 style="display: inline-block;float:right;"><strong>Ksh.{{product.price|floatformat:2}}</strong></h4>
                 <p>{% ratings product %}</p>
             </div>
